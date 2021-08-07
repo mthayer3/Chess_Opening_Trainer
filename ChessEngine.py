@@ -23,12 +23,19 @@ class GameState():
         ]
         self.whiteToMove = True
         self.moveLog = []
-
+    #Takes a move as a parameter and executes it (this will not work for castling, pawn promotion, and en passant)
     def makeMove(self, move):
         self.board[move.startRow][move.startCol] = "--"
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move) #Log the move for the possibility of undoing
         self.whiteToMove = not self.whiteToMove #Swap whose turn it is
+
+    def undoMove(self):
+        if len(self.moveLog) != 0: #Make sure there is a move to undo
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured
+            self.whiteToMove = not self.whiteToMove #Switch turns back
 
 class Move():
     #Maps keys to values
