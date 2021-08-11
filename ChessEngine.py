@@ -15,14 +15,17 @@ class GameState():
             ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"], 
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
+            ["--", "--", "wQ", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "bp", "--", "--", "--", "--"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"],
         ]
+
         self.moveFunctions = {'p': self.getPawnMoves, 'R': self.getRookMoves, 'N': self.getKnightMoves, 'B': self.getBishopMoves,
         'Q': self.getQueenMoves, 'K': self.getKingMoves}
+
+
         self.whiteToMove = True
         self.moveLog = []
     #Takes a move as a parameter and executes it (this will not work for castling, pawn promotion, and en passant)
@@ -77,7 +80,7 @@ class GameState():
         else:   #Black pawn moves
             if self.board[r+1][c] == "--": #1 square pawn advance
                 moves.append(Move((r,c), (r+1, c), self.board))
-                if r == 1 and self.board[r+2][c] == "--":
+                if r == 1 and self.board[r+2][c] == "--": #2 square pawn advance
                     moves.append(Move((r,c), (r+2, c), self.board))
             if c+1<= 7: #Captures to the left
                if self.board[r+1][c+1][0] == 'w':
@@ -87,12 +90,48 @@ class GameState():
                     moves.append(Move((r,c), (r+1, c-1), self.board))
 
 
-
-
-
-
     def getQueenMoves(self, r, c, moves):
-        pass
+        if self.whiteToMove:
+            for i in range(1,r+1):  #Queen move forward
+                if self.board[r-i][c] == "--":
+                    moves.append(Move((r,c), (r-i, c), self.board))
+                else:
+                    if self.board[r-i][c][0] == 'b':
+                        moves.append(Move((r,c), (r-i, c), self.board))
+                        break
+                    if self.board[r-i][c][0] == 'w':
+                        break
+            
+            for i in range(1,8-r):  #Queen move backward
+                    if self.board[r+i][c] == "--":
+                        moves.append(Move((r,c), (r+i, c), self.board))
+                    else:
+                        if self.board[r+i][c][0] == 'b':
+                            moves.append(Move((r,c), (r+i, c), self.board))
+                            break
+                        if self.board[r+i][c][0] == 'w':
+                            break
+
+            for i in range(1,8-c):    #Queen move right
+                if self.board[r][c+i] == "--":
+                    moves.append(Move((r,c), (r, c+i), self.board))
+                else:
+                    if self.board[r][c+i][0] == 'b':
+                        moves.append(Move((r,c), (r, c+i), self.board))
+                        break
+                    if self.board[r][c+i][0] == 'w':
+                        break
+            for i in range(1,c+1):    #Queen move left
+                if self.board[r][c-i] == "--":
+                    moves.append(Move((r,c), (r, c-i), self.board))
+                else:
+                    if self.board[r][c-i][0] == 'b':
+                        moves.append(Move((r,c), (r, c-i), self.board))
+                        break
+                    if self.board[r][c-i][0] == 'w':
+                        break
+                    
+
 
 
     def getKingMoves(self, r, c, moves):
