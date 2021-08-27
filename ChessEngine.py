@@ -263,6 +263,35 @@ class GameState():
                 else:
                     if self.board[r-1][c][0] == "b":
                         moves.append(Move((r,c), (r, c+1), self.board))
+            if r>=1 and c>=1:
+                if self.board[r-1][c-1] == "--":    #King move front left
+                    moves.append(Move((r,c), (r-1, c-1), self.board))
+                else:
+                    if self.board[r-1][c-1][0] == "b":
+                        moves.append(Move((r,c), (r-1, c-1), self.board))
+            if r>=1 and c<=6:
+                if self.board[r-1][c+1] == "--":    #King move front right
+                    moves.append(Move((r,c), (r-1, c+1), self.board))
+                else:
+                    if self.board[r-1][c+1][0] == "b":
+                        moves.append(Move((r,c), (r-1, c+1), self.board))
+            if r<=6 and c>=1:
+                if self.board[r+1][c-1] == "--":    #King move back left
+                    moves.append(Move((r,c), (r+1, c-1), self.board))
+                else:
+                    if self.board[r-1][c-1][0] == "b":
+                        moves.append(Move((r,c), (r+1, c-1), self.board))
+            if r<=6 and c<=6:
+                if self.board[r+1][c+1] == "--":    #King move back right
+                    moves.append(Move((r,c), (r+1, c+1), self.board))
+                else:
+                    if self.board[r-1][c-1][0] == "b":
+                        moves.append(Move((r,c), (r+1, c+1), self.board))
+
+
+
+
+
 
     def getBishopMoves(self, r, c, moves):
         pass
