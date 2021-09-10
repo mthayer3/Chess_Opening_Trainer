@@ -19,7 +19,7 @@ class GameState():
             ["--", "--", "--", "--", "wN", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
-            ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"],
+            ["wR", "wN", "wB", "wQ", "wK", "--", "wN", "wR"],
         ]
 
         self.moveFunctions = {'p': self.getPawnMoves, 'R': self.getRookMoves, 'N': self.getKnightMoves, 'B': self.getBishopMoves,
@@ -130,6 +130,48 @@ class GameState():
                         break
                     if self.board[r][c-i][0] == 'w':
                         break
+
+        else:   #Black queen moves
+            for i in range(1,r+1):  #Queen move backward
+                if self.board[r-i][c] == "--":
+                    moves.append(Move((r,c), (r-i, c), self.board))
+                else:
+                    if self.board[r-i][c][0] == 'w':
+                        moves.append(Move((r,c), (r-i, c), self.board))
+                        break
+                    if self.board[r-i][c][0] == 'b':
+                        break
+            
+            for i in range(1,8-r):  #Queen move forward
+                    if self.board[r+i][c] == "--":
+                        moves.append(Move((r,c), (r+i, c), self.board))
+                    else:
+                        if self.board[r+i][c][0] == 'w':
+                            moves.append(Move((r,c), (r+i, c), self.board))
+                            break
+                        if self.board[r+i][c][0] == 'b':
+                            break
+
+            for i in range(1,8-c):    #Queen move right
+                if self.board[r][c+i] == "--":
+                    moves.append(Move((r,c), (r, c+i), self.board))
+                else:
+                    if self.board[r][c+i][0] == 'w':
+                        moves.append(Move((r,c), (r, c+i), self.board))
+                        break
+                    if self.board[r][c+i][0] == 'b':
+                        break
+            for i in range(1,c+1):    #Queen move left
+                if self.board[r][c-i] == "--":
+                    moves.append(Move((r,c), (r, c-i), self.board))
+                else:
+                    if self.board[r][c-i][0] == 'w':
+                        moves.append(Move((r,c), (r, c-i), self.board))
+                        break
+                    if self.board[r][c-i][0] == 'b':
+                        break
+
+
                     
 
 
@@ -185,6 +227,57 @@ class GameState():
                 else:
                     if self.board[r-2][c+1][0] == "b":
                         moves.append(Move((r,c), (r+2, c+1), self.board))
+        else:
+            if r >= 2 and c >= 1:
+                if self.board[r-2][c-1] == "--":
+                    moves.append(Move((r,c), (r-2, c-1), self.board))
+                else:
+                    if self.board[r-2][c-1][0] == "w":
+                        moves.append(Move((r,c), (r-2, c-1), self.board))
+            if r >=2 and c <=6:
+                if self.board[r-2][c+1] == "--":
+                    moves.append(Move((r,c), (r-2, c+1), self.board))
+                else:
+                    if self.board[r-2][c+1][0] == "w":
+                        moves.append(Move((r,c), (r-2, c+1), self.board))
+            if r>=1 and c >=2:
+                if self.board[r-1][c-2] == "--":
+                    moves.append(Move((r,c), (r-1, c-2), self.board))
+                else:
+                    if self.board[r-1][c-2][0] == "w":
+                        moves.append(Move((r,c), (r-1, c-2), self.board))
+
+            if r <=6 and c >=2:
+                if self.board[r+1][c-2] == "--":
+                    moves.append(Move((r,c), (r+1, c-2), self.board))
+                else:
+                    if self.board[r+1][c-2][0] == "w":
+                        moves.append(Move((r,c), (r+1, c-2), self.board))
+            if r<=6 and c<= 5:
+                if self.board[r+1][c+2] == "--":
+                    moves.append(Move((r,c), (r+1, c+2), self.board))
+                else:
+                    if self.board[r+1][c+2][0] == "w":
+                        moves.append(Move((r,c), (r+1, c+2), self.board))
+            if r>=1 and c <=5:
+                if self.board[r-1][c+2] == "--":
+                    moves.append(Move((r,c), (r-1, c+2), self.board))
+                else:
+                    if self.board[r-1][c+2][0] == "w":
+                        moves.append(Move((r,c), (r-1, c+2), self.board))
+            if r<=5 and c>=1:
+                if self.board[r+2][c-1] == "--":
+                    moves.append(Move((r,c), (r+2, c-1), self.board))
+                else:
+                    if self.board[r+2][c-1][0] == "w":
+                        moves.append(Move((r,c), (r+2, c-1), self.board))
+            if r<= 5 and c<= 6:
+                if self.board[r+2][c+1] == "--":
+                    moves.append(Move((r,c), (r+2, c+1), self.board))
+                else:
+                    if self.board[r-2][c+1][0] == "w":
+                        moves.append(Move((r,c), (r+2, c+1), self.board))
+                
                 
 
                     
@@ -234,8 +327,47 @@ class GameState():
                         break
                     if self.board[r][c-i][0] == 'w':
                         break
-            
 
+        else:       #Black rook
+
+            for i in range(1,r+1):  #Rook move backward
+                    if self.board[r-i][c] == "--":
+                        moves.append(Move((r,c), (r-i, c), self.board))
+                    else:
+                        if self.board[r-i][c][0] == 'w':
+                            moves.append(Move((r,c), (r-i, c), self.board))
+                            break
+                        if self.board[r-i][c][0] == 'b':
+                            break
+            
+            for i in range(1,8-r):  #Rook move forward
+                    if self.board[r+i][c] == "--":
+                        moves.append(Move((r,c), (r+i, c), self.board))
+                    else:
+                        if self.board[r+i][c][0] == 'w':
+                            moves.append(Move((r,c), (r+i, c), self.board))
+                            break
+                        if self.board[r+i][c][0] == 'b':
+                            break
+
+            for i in range(1,8-c):    #Rook move right
+                if self.board[r][c+i] == "--":
+                    moves.append(Move((r,c), (r, c+i), self.board))
+                else:
+                    if self.board[r][c+i][0] == 'w':
+                        moves.append(Move((r,c), (r, c+i), self.board))
+                        break
+                    if self.board[r][c+i][0] == 'b':
+                        break
+            for i in range(1,c+1):    #Rook move left
+                if self.board[r][c-i] == "--":
+                    moves.append(Move((r,c), (r, c-i), self.board))
+                else:
+                    if self.board[r][c-i][0] == 'w':
+                        moves.append(Move((r,c), (r, c-i), self.board))
+                        break
+                    if self.board[r][c-i][0] == 'b':
+                        break
 
     def getKingMoves(self, r, c, moves):
         if self.whiteToMove:
@@ -264,13 +396,13 @@ class GameState():
                     if self.board[r-1][c][0] == "b":
                         moves.append(Move((r,c), (r, c+1), self.board))
             if r>=1 and c>=1:
-                if self.board[r-1][c-1] == "--":    #King move front left
+                if self.board[r-1][c-1] == "--":    #King move up left
                     moves.append(Move((r,c), (r-1, c-1), self.board))
                 else:
                     if self.board[r-1][c-1][0] == "b":
                         moves.append(Move((r,c), (r-1, c-1), self.board))
             if r>=1 and c<=6:
-                if self.board[r-1][c+1] == "--":    #King move front right
+                if self.board[r-1][c+1] == "--":    #King move up right
                     moves.append(Move((r,c), (r-1, c+1), self.board))
                 else:
                     if self.board[r-1][c+1][0] == "b":
@@ -287,14 +419,94 @@ class GameState():
                 else:
                     if self.board[r-1][c-1][0] == "b":
                         moves.append(Move((r,c), (r+1, c+1), self.board))
+            
+            
+        else:   #Black king moves
+
+
+            if r>= 1:
+                if self.board[r-1][c] == "--": #King move down
+                    moves.append(Move((r,c), (r-1, c), self.board))
+                else:
+                    if self.board[r-1][c][0] == "w":
+                        moves.append(Move((r,c), (r-1, c), self.board))
+            if c>=1:
+                if self.board[r][c-1] == "--":  #King move left
+                    moves.append(Move((r,c), (r, c-1), self.board))
+                else:
+                    if self.board[r][c-1][0] == "w":
+                        moves.append(Move((r,c), (r, c-1), self.board))
+            if r<= 6:
+                if self.board[r+1][c] == "--":  #King move up
+                    moves.append(Move((r,c), (r+1, c), self.board))
+                else:
+                    if self.board[r][c+1][0] == "w":
+                        moves.append(Move((r,c), (r, c+1), self.board))
+            if c<=6:
+                if self.board[r-1][c] == "--":  #King move right
+                    moves.append(Move((r,c), (r, c+1), self.board))
+                else:
+                    if self.board[r-1][c][0] == "w":
+                        moves.append(Move((r,c), (r, c+1), self.board))
+            if r>=1 and c>=1:
+                if self.board[r-1][c-1] == "--":    #King move back left
+                    moves.append(Move((r,c), (r-1, c-1), self.board))
+                else:
+                    if self.board[r-1][c-1][0] == "w":
+                        moves.append(Move((r,c), (r-1, c-1), self.board))
+            if r>=1 and c<=6:
+                if self.board[r-1][c+1] == "--":    #King move back right
+                    moves.append(Move((r,c), (r-1, c+1), self.board))
+                else:
+                    if self.board[r-1][c+1][0] == "w":
+                        moves.append(Move((r,c), (r-1, c+1), self.board))
+            if r<=6 and c>=1:
+                if self.board[r+1][c-1] == "--":    #King move up left
+                    moves.append(Move((r,c), (r+1, c-1), self.board))
+                else:
+                    if self.board[r-1][c-1][0] == "w":
+                        moves.append(Move((r,c), (r+1, c-1), self.board))
+            if r<=6 and c<=6:
+                if self.board[r+1][c+1] == "--":    #King move up right
+                    moves.append(Move((r,c), (r+1, c+1), self.board))
+                else:
+                    if self.board[r-1][c-1][0] == "w":
+                        moves.append(Move((r,c), (r+1, c+1), self.board))
 
 
 
-
+# for i in range(1,r+1):  #Rook move forward
+#                 if self.board[r-i][c] == "--":
+#                     moves.append(Move((r,c), (r-i, c), self.board))
+#                 else:
+#                     if self.board[r-i][c][0] == 'b':
+#                         moves.append(Move((r,c), (r-i, c), self.board))
+#                         break
+#                     if self.board[r-i][c][0] == 'w':
+#                         break
 
 
     def getBishopMoves(self, r, c, moves):
-        pass
+        if self.whiteToMove:
+            #Forward right
+            for i in range(1,8):
+                if r-i <= 0 or c+1 >= 7:
+                    print("WASSUP")
+                    break
+                # if self.board[r-i][c+i] == "--":
+                #     moves.append(Move((r,c), (r-i, c+i), self.board))
+                # else:
+                #     if self.board[r-i][c+i][0] == 'b':
+                #         moves.append(Move((r,c), (r-i, c+i), self.board))
+                #         break
+                #     if self.board[r-i][c+i][0] == 'w':
+                #         break
+
+
+
+
+
+
 
 
 
