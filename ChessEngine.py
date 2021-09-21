@@ -16,10 +16,10 @@ class GameState():
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "--", "wN", "--", "--", "--"],
+            ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
-            ["wR", "wN", "wB", "wQ", "wK", "--", "wN", "wR"],
+            ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"],
         ]
 
         self.moveFunctions = {'p': self.getPawnMoves, 'R': self.getRookMoves, 'N': self.getKnightMoves, 'B': self.getBishopMoves,
@@ -130,6 +130,55 @@ class GameState():
                         break
                     if self.board[r][c-i][0] == 'w':
                         break
+            #Queen diagonol forward right
+            i = 1
+            while r-i >=0 and c+i <= 7:
+                if self.board[r-i][c+i] == "--":
+                    moves.append(Move((r,c), (r-i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c+i][0] == 'b':
+                        moves.append(Move((r,c), (r-i, c+i), self.board))
+                        break
+                    if self.board[r-i][c+i][0] == 'w':
+                        break
+            #Queen diagonol forward left
+            i =1
+            while r-i >=0 and c-i >= 0:
+                if self.board[r-i][c-i] == "--":
+                    moves.append(Move((r,c), (r-i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c-i][0] == 'b':
+                        moves.append(Move((r,c), (r-i, c-i), self.board))
+                        break
+                    if self.board[r-i][c-i][0] == 'w':
+                        break
+            
+             #Queen diagonol back left
+            i =1
+            while r+i <=7 and c-i >= 0:
+                if self.board[r+i][c-i] == "--":
+                    moves.append(Move((r,c), (r+i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c-i][0] == 'b':
+                        moves.append(Move((r,c), (r+i, c-i), self.board))
+                        break
+                    if self.board[r+i][c-i][0] == 'w':
+                        break
+             #Queen diagonol back right
+            i =1
+            while r+i <=7 and c+i <= 7:
+                if self.board[r+i][c+i] == "--":
+                    moves.append(Move((r,c), (r+i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c+i][0] == 'b':
+                        moves.append(Move((r,c), (r+i, c+i), self.board))
+                        break
+                    if self.board[r+i][c+i][0] == 'w':
+                        break
 
         else:   #Black queen moves
             for i in range(1,r+1):  #Queen move backward
@@ -170,7 +219,55 @@ class GameState():
                         break
                     if self.board[r][c-i][0] == 'b':
                         break
-
+            #Queen diagonol back right
+            i = 1
+            while r-i >=0 and c+i <= 7:
+                if self.board[r-i][c+i] == "--":
+                    moves.append(Move((r,c), (r-i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c+i][0] == 'w':
+                        moves.append(Move((r,c), (r-i, c+i), self.board))
+                        break
+                    if self.board[r-i][c+i][0] == 'b':
+                        break
+            #Queen diagonol back left
+            i =1
+            while r-i >=0 and c-i >= 0:
+                if self.board[r-i][c-i] == "--":
+                    moves.append(Move((r,c), (r-i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c-i][0] == 'w':
+                        moves.append(Move((r,c), (r-i, c-i), self.board))
+                        break
+                    if self.board[r-i][c-i][0] == 'b':
+                        break
+            
+             #Queen diagonol forward right
+            i =1
+            while r+i <=7 and c-i >= 0:
+                if self.board[r+i][c-i] == "--":
+                    moves.append(Move((r,c), (r+i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c-i][0] == 'w':
+                        moves.append(Move((r,c), (r+i, c-i), self.board))
+                        break
+                    if self.board[r+i][c-i][0] == 'b':
+                        break
+             #Queen diagonol forward left
+            i =1
+            while r+i <=7 and c+i <= 7:
+                if self.board[r+i][c+i] == "--":
+                    moves.append(Move((r,c), (r+i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c+i][0] == 'w':
+                        moves.append(Move((r,c), (r+i, c+i), self.board))
+                        break
+                    if self.board[r+i][c+i][0] == 'b':
+                        break
 
                     
 
@@ -488,11 +585,110 @@ class GameState():
 
     def getBishopMoves(self, r, c, moves):
         if self.whiteToMove:
+            #Bishop forward right
+            i = 1
+            while r-i >=0 and c+i <= 7:
+                if self.board[r-i][c+i] == "--":
+                    moves.append(Move((r,c), (r-i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c+i][0] == 'b':
+                        moves.append(Move((r,c), (r-i, c+i), self.board))
+                        break
+                    if self.board[r-i][c+i][0] == 'w':
+                        break
+            #Bishop forward left
+            i =1
+            while r-i >=0 and c-i >= 0:
+                if self.board[r-i][c-i] == "--":
+                    moves.append(Move((r,c), (r-i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c-i][0] == 'b':
+                        moves.append(Move((r,c), (r-i, c-i), self.board))
+                        break
+                    if self.board[r-i][c-i][0] == 'w':
+                        break
+            
+             #Bishop back left
+            i =1
+            while r+i <=7 and c-i >= 0:
+                if self.board[r+i][c-i] == "--":
+                    moves.append(Move((r,c), (r+i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c-i][0] == 'b':
+                        moves.append(Move((r,c), (r+i, c-i), self.board))
+                        break
+                    if self.board[r+i][c-i][0] == 'w':
+                        break
+             #Bishop back right
+            i =1
+            while r+i <=7 and c+i <= 7:
+                if self.board[r+i][c+i] == "--":
+                    moves.append(Move((r,c), (r+i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c+i][0] == 'b':
+                        moves.append(Move((r,c), (r+i, c+i), self.board))
+                        break
+                    if self.board[r+i][c+i][0] == 'w':
+                        break
+        else:
+            #Bishop back right
+            i = 1
+            while r-i >=0 and c+i <= 7:
+                if self.board[r-i][c+i] == "--":
+                    moves.append(Move((r,c), (r-i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c+i][0] == 'w':
+                        moves.append(Move((r,c), (r-i, c+i), self.board))
+                        break
+                    if self.board[r-i][c+i][0] == 'b':
+                        break
+            #Bishop back left
+            i =1
+            while r-i >=0 and c-i >= 0:
+                if self.board[r-i][c-i] == "--":
+                    moves.append(Move((r,c), (r-i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r-i][c-i][0] == 'w':
+                        moves.append(Move((r,c), (r-i, c-i), self.board))
+                        break
+                    if self.board[r-i][c-i][0] == 'b':
+                        break
+            
+             #Bishop forward right
+            i =1
+            while r+i <=7 and c-i >= 0:
+                if self.board[r+i][c-i] == "--":
+                    moves.append(Move((r,c), (r+i, c-i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c-i][0] == 'w':
+                        moves.append(Move((r,c), (r+i, c-i), self.board))
+                        break
+                    if self.board[r+i][c-i][0] == 'b':
+                        break
+             #Bishop forward left
+            i =1
+            while r+i <=7 and c+i <= 7:
+                if self.board[r+i][c+i] == "--":
+                    moves.append(Move((r,c), (r+i, c+i), self.board))
+                    i+=1
+                else:
+                    if self.board[r+i][c+i][0] == 'w':
+                        moves.append(Move((r,c), (r+i, c+i), self.board))
+                        break
+                    if self.board[r+i][c+i][0] == 'b':
+                        break
+
+
+
             #Forward right
-            for i in range(1,8):
-                if r-i <= 0 or c+1 >= 7:
-                    print("WASSUP")
-                    break
+            
                 # if self.board[r-i][c+i] == "--":
                 #     moves.append(Move((r,c), (r-i, c+i), self.board))
                 # else:
