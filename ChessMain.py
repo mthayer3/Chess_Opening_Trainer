@@ -55,8 +55,10 @@ def main():
                     if move in validMoves:
                         gs.makeMove(move)
                         moveMade = True
-                    sqSelected = () 
-                    playerClicks = []
+                        sqSelected = () 
+                        playerClicks = []
+                    else:
+                        playerClicks = [sqSelected]
 
 
                 # sqSelected = (row, col)
