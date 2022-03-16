@@ -171,7 +171,7 @@ def animateMove(move, screen, board, clock):
     coords = []
     dR = move.endRow - move.startRow
     dC = move.endCol - move.startCol
-    framesPerSquare = 10    #Frames to move one square
+    framesPerSquare = 5    #Frames to move one square
     frameCount = (abs(dR) + abs(dC)) * framesPerSquare
     for frame in range(frameCount + 1):
        r,c =  (move.startRow + dR* frame/frameCount, move.startCol + dC*frame/frameCount)
