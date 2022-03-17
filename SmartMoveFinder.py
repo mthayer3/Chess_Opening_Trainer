@@ -15,8 +15,10 @@ def findRandomMove(validMoves, currBoard):
             if len(key)>=2:
 
                 for i in key:
-                    if chance < i[-1]:
-                        return ChessEngine.Move((i[0],i[1]), (i[2], i[3]), currBoard)
+                    if chance <= i[-1]:
+                            return ChessEngine.Move((i[0],i[1]), (i[2], i[3]), currBoard)
+                    
+
             else:
                 if chance < key[-1]:
                         return ChessEngine.Move((key[0],key[1]), (key[2], key[3]), currBoard)
