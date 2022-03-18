@@ -1,4 +1,4 @@
-from SicilianModern import my_dict
+from ScotchGambit import my_dict
 import random
 import ChessEngine
 
@@ -29,7 +29,10 @@ def findRandomMove(validMoves, currBoard):
         # return ChessEngine.Move((1,4), (3,4), currBoard)
         
     else:
+        print("That is the end of CPU theory knowledge")
         return validMoves[random.randint(0, len(validMoves)-1)]
+        
+        
 
 def findBestMove():
     pass
