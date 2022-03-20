@@ -16,6 +16,7 @@ def findRandomMove(validMoves, currBoard):
 
                 for i in key:
                     if chance <= i[-1]:
+
                             return ChessEngine.Move((i[0],i[1]), (i[2], i[3]), currBoard)
                     
 
