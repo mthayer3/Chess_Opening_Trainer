@@ -1,4 +1,4 @@
-from SicilianModern import my_dict
+from StaffordGambit import my_dict
 import random
 import ChessEngine
 
