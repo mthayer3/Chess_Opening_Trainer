@@ -1,4 +1,4 @@
-from ScotchGambit import my_dict
+from BlackmarDiemerGambit import my_dict
 import random
 import ChessEngine
 
