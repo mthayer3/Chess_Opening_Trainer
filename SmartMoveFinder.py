@@ -1,4 +1,4 @@
-from BlackmarDiemerGambit import my_dict
+from FrenchDefense import my_dict
 import random
 import ChessEngine
 
