@@ -1,11 +1,10 @@
-from ScotchGambit import my_dict
+from Pirc import my_dict
 import random
 import ChessEngine
 
 
 def findRandomMove(validMoves, currBoard):
-    # if currBoard in my_dict.values():
-    #     print("YOOOOOOOOOOOUUUUUUU")
+    
     for key, value in my_dict.items():
         if value == currBoard:
             
