@@ -1,4 +1,4 @@
-from Pirc import my_dict
+from HaxoGambit import my_dict
 import random
 import ChessEngine
 
